@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "name": "instagram-follower",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^24.20.0"
+  }
+}
