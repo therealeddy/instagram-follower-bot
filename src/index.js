@@ -43,6 +43,15 @@ async function processLink(browser, url, index) {
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: "networkidle2" });
 
+  for (const selector of BUTTON_SELECTOR_FINALS) {
+    const exists = await page.$(selector);
+    if (exists) {
+      console.log(`⚠️ Já está seguindo/solicitado no link [${index}], pulando...`);
+      await page.close();
+      return;
+    }
+  }
+
   console.log("🔎 Procurando botão inicial...");
   const button = await Promise.race(
     BUTTON_SELECTOR_INITIALS.map((selector) =>
@@ -65,6 +74,7 @@ async function processLink(browser, url, index) {
 
   await randomDelay();
 }
+
 
 async function main() {
   const browser = await puppeteer.launch({
